@@ -8,8 +8,9 @@
 
 #import "GameViewController.h"
 
-float mySphereRadius = 2.5 ;
+float mySphereRadius = 1.5 ;
 float myMaxVal = 0.0;
+int myDataSet = 1;
 
 @implementation GameViewController
 {
@@ -24,9 +25,12 @@ float myMaxVal = 0.0;
     int myDimensions = 0;
     int myConceptCount = 0;
     
+//    NSString *myPath = @"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk6allresponsesROT.crd";
+    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk%iallresponsesROT.crd.txt", myDataSet];
+    NSURL *url = [NSURL fileURLWithPath:myEditPath];
+    
 //    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/rzFileIOTest/wk1allresponsesROT.crd.txt" ];
 //    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk3allresponsesROT.crd" ];
-    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk9allresponsesROT.crd" ];
 //    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk2allresponsesROT.crd.txt" ];
 //    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk1allresponsesROT.crd.txt" ];
     NSError *error;
@@ -72,7 +76,10 @@ float myMaxVal = 0.0;
         NSLog(@"Dims: %i",myDimensions);
         NSLog(@"Cons: %i",myConceptCount);
         NSString *myTitleString = [[myFileLines objectAtIndex:0] substringFromIndex:19];
-        NSLog(@"Title Is: %@",myTitleString);
+        NSMutableString *myEditedTitleString = [NSMutableString stringWithString:myTitleString];
+        [myEditedTitleString replaceOccurrencesOfString:@"    " withString:@" " options:NSLiteralSearch range:NSMakeRange(1, myTitleString.length - 1)];
+        
+        NSLog(@"Title Is: %@",myEditedTitleString);
         NSLog(@"Line Count= %lu",myWorkLineCount);
         
         NSArray *myCrdLines = [ myWorkLines objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange( 1, myWorkLineCount  - myConceptCount - 1)]   ];
@@ -129,14 +136,37 @@ float myMaxVal = 0.0;
         cameraNode.camera.zFar = 5000.0;
         
         [cameraNode setName:@"camera"];
+
         
-        // create and add a light to the scene
+//        // create and add a first light
 //        SCNNode *lightNode = [SCNNode node];
 //        lightNode.light = [SCNLight light];
 //        lightNode.light.type = SCNLightTypeOmni;
 //        lightNode.light.attenuationEndDistance = 10000.0;
-//        lightNode.position = SCNVector3Make(0, 100, 50);
+//        lightNode.position = SCNVector3Make(0, 100, 100);
+//        lightNode.light.color = [UIColor whiteColor];
 //        [scene.rootNode addChildNode:lightNode];
+//
+//        
+//        
+//        // create and add a light above the floor
+//        SCNNode *topLightNode = [SCNNode node];
+//        topLightNode.light = [SCNLight light];
+//        topLightNode.light.type = SCNLightTypeOmni;
+////        topLightNode.light.attenuationEndDistance = 1000.0;
+//        topLightNode.position = SCNVector3Make(0, 200, -100);
+//        topLightNode.light.color = [UIColor yellowColor];
+//        [scene.rootNode addChildNode:topLightNode];
+//
+//        
+//        // create and add a light below the floor
+//        SCNNode *bottomLightNode = [SCNNode node];
+//        bottomLightNode.light = [SCNLight light];
+//        bottomLightNode.light.type = SCNLightTypeOmni;
+////        bottomLightNode.light.attenuationEndDistance = 1000.0;
+//        bottomLightNode.position = SCNVector3Make(0, -200, -100);
+//        bottomLightNode.light.color = [UIColor blueColor];
+//        [scene.rootNode addChildNode:bottomLightNode];
         
         
         NSArray *myCrdLabels = [ myWorkLines objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange( myWorkLineCount - myConceptCount , myConceptCount)] ];
@@ -161,11 +191,11 @@ float myMaxVal = 0.0;
         
         
         // rz display the title somewhere
-        SCNText *myTitleGeometry = [SCNText textWithString:myTitleString extrusionDepth:1.0];
+        SCNText *myTitleGeometry = [SCNText textWithString:myEditedTitleString extrusionDepth:1.0];
         SCNNode *myTitleNode = [SCNNode nodeWithGeometry:myTitleGeometry];
         [myTitleNode setScale:SCNVector3Make(2, 2, 2)];
         [myTitleGeometry.firstMaterial setTransparency:0.5];
-        [myTitleNode setPosition:SCNVector3Make( -myMaxVal * 4 , myMaxVal * 4 , -myMaxVal * 2 )];
+        [myTitleNode setPosition:SCNVector3Make( -myMaxVal * 2 , myMaxVal * 2 , -myMaxVal * 2 )];
         [scene.rootNode addChildNode:myTitleNode];
         
         
@@ -177,14 +207,14 @@ float myMaxVal = 0.0;
             SCNSphere *mySphere = [SCNSphere sphereWithRadius:mySphereRadius];
             mySphere.firstMaterial.diffuse.contents = [UIColor redColor];
             mySphere.firstMaterial.specular.contents = [UIColor whiteColor];
-            mySphere.firstMaterial.shininess = 100.0;
+            mySphere.firstMaterial.shininess = 1.0;
             [mySphereNode setGeometry:mySphere];
             [mySphereNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2])];
             [scene.rootNode addChildNode:mySphereNode];
             
             
             SCNNode *myTextNode = [SCNNode node];
-            SCNText *myText = [SCNText textWithString:myCrdLabels[i] extrusionDepth:1.0];
+            SCNText *myText = [SCNText textWithString:myCrdLabels[i] extrusionDepth:2.0];
             NSLog(@"MyText = %@",myText);
             [myTextNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2])];
             [myTextNode setGeometry:myText];
@@ -216,7 +246,9 @@ float myMaxVal = 0.0;
         myFloor.firstMaterial.doubleSided = YES;
         myFloor.firstMaterial.transparency = 0.5;
         scene.rootNode.geometry = myFloor;
-        myFloor.firstMaterial.diffuse.contents = @"Pattern_Grid_16x16.png";
+//        myFloor.firstMaterial.diffuse.contents = @"Pattern_Grid_16x16.png";
+        //        myFloor.firstMaterial.diffuse.contents = @"unnamed.png";
+        myFloor.firstMaterial.diffuse.contents = @"8x8_binary_grid.png";
         myFloor.firstMaterial.locksAmbientWithDiffuse = YES;
         
         
@@ -259,40 +291,46 @@ float myMaxVal = 0.0;
 - (void) handleTap:(UIGestureRecognizer*)gestureRecognize
 {
     // retrieve the SCNView
-    SCNView *scnView = (SCNView *)self.view;
+//    SCNView *scnView = (SCNView *)self.view;
+    if (myDataSet < 9 ) {
+        myDataSet++;
+    }
+    else{
+        myDataSet = 1;
+    }
     
     // check what nodes are tapped
-    CGPoint p = [gestureRecognize locationInView:scnView];
-    NSArray *hitResults = [scnView hitTest:p options:nil];
-    
-    // check that we clicked on at least one object
-    if([hitResults count] > 0){
-        // retrieved the first clicked object
-        SCNHitTestResult *result = [hitResults objectAtIndex:0];
-        
-        // get its material
-        SCNMaterial *material = result.node.geometry.firstMaterial;
-        
-        // highlight it
-        [SCNTransaction begin];
-        // rz make this duration fast to flash
-        [SCNTransaction setAnimationDuration:0.01];
-        
-        // on completion - unhighlight
-        [SCNTransaction setCompletionBlock:^{
-            [SCNTransaction begin];
-            // rz make this duration fast to flash
-            [SCNTransaction setAnimationDuration:0.01];
-            
-            material.emission.contents = [UIColor blackColor];
-            
-            [SCNTransaction commit];
-        }];
-        
-        material.emission.contents = [UIColor redColor];
-        
-        [SCNTransaction commit];
-    }
+//    CGPoint p = [gestureRecognize locationInView:scnView];
+//    NSArray *hitResults = [scnView hitTest:p options:nil];
+//    
+//    // check that we clicked on at least one object
+//    if([hitResults count] > 0){
+//        // retrieved the first clicked object
+//        SCNHitTestResult *result = [hitResults objectAtIndex:0];
+//        
+//        // get its material
+//        SCNMaterial *material = result.node.geometry.firstMaterial;
+//        
+//        // highlight it
+//        [SCNTransaction begin];
+//        // rz make this duration fast to flash
+//        [SCNTransaction setAnimationDuration:0.01];
+//        
+//        // on completion - unhighlight
+//        [SCNTransaction setCompletionBlock:^{
+//            [SCNTransaction begin];
+//            // rz make this duration fast to flash
+//            [SCNTransaction setAnimationDuration:0.01];
+//            
+//            material.emission.contents = [UIColor blackColor];
+//            
+//            [SCNTransaction commit];
+//        }];
+//        
+//        material.emission.contents = [UIColor redColor];
+//        
+//        [SCNTransaction commit];
+//    }
 }
 
 - (BOOL)shouldAutorotate
