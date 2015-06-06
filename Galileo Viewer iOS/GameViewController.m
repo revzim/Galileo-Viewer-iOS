@@ -171,14 +171,14 @@ int myDataSet = 1;
         [myTopLight setColor:[UIColor whiteColor]];
 
         SCNNode *topLightNode = [SCNNode node];
-        [topLightNode setPosition: SCNVector3Make(0, 200, 200)];
+        [topLightNode setPosition: SCNVector3Make(0, 300, 200)];
         [topLightNode setLight:myTopLight];
         [scene.rootNode addChildNode:topLightNode];
 
         
         // create and add a second light above the floor
         SCNNode *topLightNode2 = [SCNNode node];
-        [topLightNode2 setPosition: SCNVector3Make(0, 200, -200)];
+        [topLightNode2 setPosition: SCNVector3Make(0, 300, -300)];
         [topLightNode2 setLight:myTopLight];
         [scene.rootNode addChildNode:topLightNode2];
         
@@ -225,6 +225,7 @@ int myDataSet = 1;
         
         [myTitleGeometry.firstMaterial.specular setContents:[UIColor blueColor]];
         [myTitleGeometry.firstMaterial.ambient setContents:[UIColor blueColor]];
+        [myTitleGeometry setSubdivisionLevel:2];
         [myTitleNode setPosition:SCNVector3Make( -myMaxX * 1.2 , myMaxY * 1.2 , -myMaxZ * 1.2 )];
         [scene.rootNode addChildNode:myTitleNode];
         
@@ -238,6 +239,7 @@ int myDataSet = 1;
             mySphere.firstMaterial.diffuse.contents = [UIColor redColor];
             mySphere.firstMaterial.specular.contents = [UIColor whiteColor];
             mySphere.firstMaterial.shininess = 1.0;
+//            [mySphereNode setCastsShadow:YES];
             [mySphereNode setGeometry:mySphere];
             [mySphereNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2])];
             [scene.rootNode addChildNode:mySphereNode];
@@ -245,6 +247,12 @@ int myDataSet = 1;
             
             SCNNode *myTextNode = [SCNNode node];
             SCNText *myText = [SCNText textWithString:myCrdLabels[i] extrusionDepth:2.0];
+            myText.firstMaterial.shininess = 0.75;
+            [myText setChamferRadius:0.25];
+            [myText setSubdivisionLevel:1];
+//            SCNLookAtConstraint *myConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:cameraNode];
+//            NSArray *myConstraintArray = [NSArray arrayWithObjects:myConstraint, nil];
+//            myTextNode.constraints = myConstraintArray;
             NSLog(@"MyText = %@",myText);
             [myTextNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2])];
             [myTextNode setGeometry:myText];
