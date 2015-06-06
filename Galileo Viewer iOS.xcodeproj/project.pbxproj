@@ -10,11 +10,12 @@
 		7C2DF24B1B23235000263053 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF24A1B23235000263053 /* main.m */; };
 		7C2DF24E1B23235000263053 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF24D1B23235000263053 /* AppDelegate.m */; };
 		7C2DF2501B23235000263053 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF24F1B23235000263053 /* art.scnassets */; };
-		7C2DF2531B23235000263053 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF2521B23235000263053 /* GameViewController.m */; };
 		7C2DF2561B23235000263053 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2541B23235000263053 /* Main.storyboard */; };
 		7C2DF2581B23235000263053 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2571B23235000263053 /* Images.xcassets */; };
 		7C2DF25B1B23235000263053 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2591B23235000263053 /* LaunchScreen.xib */; };
 		7C2DF2671B23235000263053 /* Galileo_Viewer_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF2661B23235000263053 /* Galileo_Viewer_iOSTests.m */; };
+		7C2DF2711B23239900263053 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF2701B23239900263053 /* GameViewController.m */; };
+		7C2DF2731B2323A300263053 /* Pattern_Grid_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,13 +36,14 @@
 		7C2DF24D1B23235000263053 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7C2DF24F1B23235000263053 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		7C2DF2511B23235000263053 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		7C2DF2521B23235000263053 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		7C2DF2551B23235000263053 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7C2DF2571B23235000263053 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7C2DF25A1B23235000263053 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7C2DF2601B23235000263053 /* Galileo Viewer iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Galileo Viewer iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C2DF2651B23235000263053 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C2DF2661B23235000263053 /* Galileo_Viewer_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Galileo_Viewer_iOSTests.m; sourceTree = "<group>"; };
+		7C2DF2701B23239900263053 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pattern_Grid_16x16.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +89,7 @@
 				7C2DF24D1B23235000263053 /* AppDelegate.m */,
 				7C2DF24F1B23235000263053 /* art.scnassets */,
 				7C2DF2511B23235000263053 /* GameViewController.h */,
-				7C2DF2521B23235000263053 /* GameViewController.m */,
+				7C2DF2701B23239900263053 /* GameViewController.m */,
 				7C2DF2541B23235000263053 /* Main.storyboard */,
 				7C2DF2571B23235000263053 /* Images.xcassets */,
 				7C2DF2591B23235000263053 /* LaunchScreen.xib */,
@@ -99,6 +101,7 @@
 		7C2DF2481B23235000263053 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */,
 				7C2DF2491B23235000263053 /* Info.plist */,
 				7C2DF24A1B23235000263053 /* main.m */,
 			);
@@ -206,6 +209,7 @@
 				7C2DF2581B23235000263053 /* Images.xcassets in Resources */,
 				7C2DF2501B23235000263053 /* art.scnassets in Resources */,
 				7C2DF2561B23235000263053 /* Main.storyboard in Resources */,
+				7C2DF2731B2323A300263053 /* Pattern_Grid_16x16.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,7 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C2DF24E1B23235000263053 /* AppDelegate.m in Sources */,
-				7C2DF2531B23235000263053 /* GameViewController.m in Sources */,
+				7C2DF2711B23239900263053 /* GameViewController.m in Sources */,
 				7C2DF24B1B23235000263053 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
