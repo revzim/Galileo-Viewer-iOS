@@ -14,7 +14,11 @@ float myMaxY = 0.0;
 float myMaxZ = 0.0;
 
 float myMaxVal = 0.0;
-int myDataSet = 1;
+
+int myDataSet = 9;
+
+int mySubDivisionsHigh = 0;
+int mySubDivisionsLow = 0;
 
 @implementation GameViewController
 {
@@ -28,21 +32,21 @@ int myDataSet = 1;
     NSString *myConString = [[NSString alloc] init];
     int myDimensions = 0;
     int myConceptCount = 0;
-    
-//    NSString *myPath = @"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk6allresponsesROT.crd";
-    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk%iallresponsesROT.crd.txt", myDataSet];
-    NSURL *url = [NSURL fileURLWithPath:myEditPath];
+//    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk%iallresponsesROT.crd.txt", myDataSet];
+//    NSURL *url = [NSURL fileURLWithPath:myEditPath];
     
 //    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/rzFileIOTest/wk1allresponsesROT.crd.txt" ];
-//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk3allresponsesROT.crd" ];
-//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk2allresponsesROT.crd.txt" ];
-//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk1allresponsesROT.crd.txt" ];
+    NSURL *url = [NSURL URLWithString:@"http://robzimmelman.tripod.com/Galileo/wk1allresponsesROT.crd.txt"];
+
+    
+    
+    
     NSError *error;
     
     //        NSString *stringFromFile = [NSString stringWithContentsOfFile:@"./test.txt" encoding:NSASCIIStringEncoding error: NULL];
     
     
-    NSString *stringFromFile = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:NULL];
+    NSString *stringFromFile = [NSString stringWithContentsOfURL:url encoding:NSASCIIStringEncoding error:NULL];
     //        NSNumber *myNextNum = 0;
     
     if (stringFromFile == nil) {
@@ -225,7 +229,7 @@ int myDataSet = 1;
         
         [myTitleGeometry.firstMaterial.specular setContents:[UIColor blueColor]];
         [myTitleGeometry.firstMaterial.ambient setContents:[UIColor blueColor]];
-        [myTitleGeometry setSubdivisionLevel:2];
+        [myTitleGeometry setSubdivisionLevel:mySubDivisionsHigh];
         [myTitleNode setPosition:SCNVector3Make( -myMaxX * 1.2 , myMaxY * 1.2 , -myMaxZ * 1.2 )];
         [scene.rootNode addChildNode:myTitleNode];
         
@@ -249,7 +253,7 @@ int myDataSet = 1;
             SCNText *myText = [SCNText textWithString:myCrdLabels[i] extrusionDepth:2.0];
             myText.firstMaterial.shininess = 0.75;
             [myText setChamferRadius:0.25];
-            [myText setSubdivisionLevel:1];
+            [myText setSubdivisionLevel:mySubDivisionsLow];
 //            SCNLookAtConstraint *myConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:cameraNode];
 //            NSArray *myConstraintArray = [NSArray arrayWithObjects:myConstraint, nil];
 //            myTextNode.constraints = myConstraintArray;
