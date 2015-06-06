@@ -9,6 +9,10 @@
 #import "GameViewController.h"
 
 float mySphereRadius = 1.5 ;
+float myMaxX = 0.0;
+float myMaxY = 0.0;
+float myMaxZ = 0.0;
+
 float myMaxVal = 0.0;
 int myDataSet = 1;
 
@@ -102,15 +106,36 @@ int myDataSet = 1;
             myCrdsArray[i][1] =  myTempY;
             myCrdsArray[i][2] =  myTempZ;
             
+            
+            // rz find out largest X, Y and Z values
+
+            if (myTempX > myMaxX) {
+                myMaxX = myTempX;
+            }
+            if (myTempY > myMaxY) {
+                myMaxY = myTempY;
+            }
+            if (myTempZ > myMaxZ) {
+                myMaxZ = myTempZ;
+            }
+            
+
+            // rz find out maxVal
+            
             if (myTempX > myMaxVal) {
                 myMaxVal = myTempX;
             }
             if (myTempY > myMaxVal) {
-                myMaxVal = myTempX;
+                myMaxVal = myTempY;
             }
             if (myTempX > myMaxVal) {
-                myMaxVal = myTempX;
+                myMaxVal = myTempZ;
             }
+
+            
+            
+            
+            
             
         }
         // create a new scene
@@ -119,9 +144,9 @@ int myDataSet = 1;
         // rz put some fog just in the middle of the ship so we can see it in real time
         //
         scene.fogColor = [UIColor whiteColor];
-        scene.fogStartDistance = 20.0;
+        scene.fogStartDistance = 50.0;
         scene.fogEndDistance = 5000.0;
-        scene.fogDensityExponent = 1.0;
+        scene.fogDensityExponent = 0.5;
         
         
         
@@ -138,35 +163,35 @@ int myDataSet = 1;
         [cameraNode setName:@"camera"];
 
         
-//        // create and add a first light
-//        SCNNode *lightNode = [SCNNode node];
-//        lightNode.light = [SCNLight light];
-//        lightNode.light.type = SCNLightTypeOmni;
-//        lightNode.light.attenuationEndDistance = 10000.0;
-//        lightNode.position = SCNVector3Make(0, 100, 100);
-//        lightNode.light.color = [UIColor whiteColor];
-//        [scene.rootNode addChildNode:lightNode];
-//
-//        
-//        
-//        // create and add a light above the floor
-//        SCNNode *topLightNode = [SCNNode node];
-//        topLightNode.light = [SCNLight light];
-//        topLightNode.light.type = SCNLightTypeOmni;
-////        topLightNode.light.attenuationEndDistance = 1000.0;
-//        topLightNode.position = SCNVector3Make(0, 200, -100);
-//        topLightNode.light.color = [UIColor yellowColor];
-//        [scene.rootNode addChildNode:topLightNode];
-//
-//        
-//        // create and add a light below the floor
-//        SCNNode *bottomLightNode = [SCNNode node];
-//        bottomLightNode.light = [SCNLight light];
-//        bottomLightNode.light.type = SCNLightTypeOmni;
-////        bottomLightNode.light.attenuationEndDistance = 1000.0;
-//        bottomLightNode.position = SCNVector3Make(0, -200, -100);
-//        bottomLightNode.light.color = [UIColor blueColor];
-//        [scene.rootNode addChildNode:bottomLightNode];
+        
+        // create and add a light above the floor
+
+        SCNLight *myTopLight = [SCNLight light];
+        [myTopLight setType:SCNLightTypeOmni];
+        [myTopLight setColor:[UIColor whiteColor]];
+
+        SCNNode *topLightNode = [SCNNode node];
+        [topLightNode setPosition: SCNVector3Make(0, 200, 200)];
+        [topLightNode setLight:myTopLight];
+        [scene.rootNode addChildNode:topLightNode];
+
+        
+        // create and add a second light above the floor
+        SCNNode *topLightNode2 = [SCNNode node];
+        [topLightNode2 setPosition: SCNVector3Make(0, 200, -200)];
+        [topLightNode2 setLight:myTopLight];
+        [scene.rootNode addChildNode:topLightNode2];
+        
+        
+        
+        // create and add a light below the floor
+        SCNNode *bottomLightNode = [SCNNode node];
+        bottomLightNode.light = [SCNLight light];
+        bottomLightNode.light.type = SCNLightTypeOmni;
+//        bottomLightNode.light.attenuationEndDistance = 1000.0;
+        bottomLightNode.position = SCNVector3Make(0, -200, -100);
+        bottomLightNode.light.color = [UIColor lightGrayColor];
+        [scene.rootNode addChildNode:bottomLightNode];
         
         
         NSArray *myCrdLabels = [ myWorkLines objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange( myWorkLineCount - myConceptCount , myConceptCount)] ];
@@ -195,7 +220,12 @@ int myDataSet = 1;
         SCNNode *myTitleNode = [SCNNode nodeWithGeometry:myTitleGeometry];
         [myTitleNode setScale:SCNVector3Make(2, 2, 2)];
         [myTitleGeometry.firstMaterial setTransparency:0.5];
-        [myTitleNode setPosition:SCNVector3Make( -myMaxVal * 2 , myMaxVal * 2 , -myMaxVal * 2 )];
+        
+        [myTitleGeometry.firstMaterial setShininess:1.0];
+        
+        [myTitleGeometry.firstMaterial.specular setContents:[UIColor blueColor]];
+        [myTitleGeometry.firstMaterial.ambient setContents:[UIColor blueColor]];
+        [myTitleNode setPosition:SCNVector3Make( -myMaxX * 1.2 , myMaxY * 1.2 , -myMaxZ * 1.2 )];
         [scene.rootNode addChildNode:myTitleNode];
         
         
@@ -244,11 +274,11 @@ int myDataSet = 1;
 //        myFloor.firstMaterial.diffuse.contents = [UIColor darkGrayColor];
 //        myFloor.firstMaterial.ambient.contents = [UIColor darkGrayColor];
         myFloor.firstMaterial.doubleSided = YES;
-        myFloor.firstMaterial.transparency = 0.5;
+        myFloor.firstMaterial.transparency = 0.35;
         scene.rootNode.geometry = myFloor;
 //        myFloor.firstMaterial.diffuse.contents = @"Pattern_Grid_16x16.png";
-        //        myFloor.firstMaterial.diffuse.contents = @"unnamed.png";
-        myFloor.firstMaterial.diffuse.contents = @"8x8_binary_grid.png";
+                myFloor.firstMaterial.diffuse.contents = @"unnamed.png";
+//        myFloor.firstMaterial.diffuse.contents = @"8x8_binary_grid.png";
         myFloor.firstMaterial.locksAmbientWithDiffuse = YES;
         
         
@@ -266,32 +296,11 @@ int myDataSet = 1;
 
 
 
--(void)myPinchInAction{
-    //
-    // rz use this swipe gesture recognizer action to move the camera
-    //
-    SCNView *scnView = (SCNView *)self.view;
-    SCNNode *myPOVNode = [[SCNNode alloc] init];
-    [myPOVNode setPosition:SCNVector3Make(0, -10, 10)];
-    [scnView setPointOfView:myPOVNode];
-}
-
--(void)myPinchOutAction{
-    
-    SCNView *scnView = (SCNView *)self.view;
-    SCNNode *myPOVNode = [[SCNNode alloc] init];
-    [myPOVNode setPosition:SCNVector3Make(0, 10, 10)];
-    [scnView setPointOfView:myPOVNode];
-    
-}
-
-
-
 
 - (void) handleTap:(UIGestureRecognizer*)gestureRecognize
 {
     // retrieve the SCNView
-//    SCNView *scnView = (SCNView *)self.view;
+    SCNView *scnView = (SCNView *)self.view;
     if (myDataSet < 9 ) {
         myDataSet++;
     }
@@ -300,37 +309,37 @@ int myDataSet = 1;
     }
     
     // check what nodes are tapped
-//    CGPoint p = [gestureRecognize locationInView:scnView];
-//    NSArray *hitResults = [scnView hitTest:p options:nil];
-//    
-//    // check that we clicked on at least one object
-//    if([hitResults count] > 0){
-//        // retrieved the first clicked object
-//        SCNHitTestResult *result = [hitResults objectAtIndex:0];
-//        
-//        // get its material
-//        SCNMaterial *material = result.node.geometry.firstMaterial;
-//        
-//        // highlight it
-//        [SCNTransaction begin];
-//        // rz make this duration fast to flash
-//        [SCNTransaction setAnimationDuration:0.01];
-//        
-//        // on completion - unhighlight
-//        [SCNTransaction setCompletionBlock:^{
-//            [SCNTransaction begin];
-//            // rz make this duration fast to flash
-//            [SCNTransaction setAnimationDuration:0.01];
-//            
-//            material.emission.contents = [UIColor blackColor];
-//            
-//            [SCNTransaction commit];
-//        }];
-//        
-//        material.emission.contents = [UIColor redColor];
-//        
-//        [SCNTransaction commit];
-//    }
+    CGPoint p = [gestureRecognize locationInView:scnView];
+    NSArray *hitResults = [scnView hitTest:p options:nil];
+    
+    // check that we clicked on at least one object
+    if([hitResults count] > 0){
+        // retrieved the first clicked object
+        SCNHitTestResult *result = [hitResults objectAtIndex:0];
+        
+        // get its material
+        SCNMaterial *material = result.node.geometry.firstMaterial;
+        
+        // highlight it
+        [SCNTransaction begin];
+        // rz make this duration fast to flash
+        [SCNTransaction setAnimationDuration:0.01];
+        
+        // on completion - unhighlight
+        [SCNTransaction setCompletionBlock:^{
+            [SCNTransaction begin];
+            // rz make this duration fast to flash
+            [SCNTransaction setAnimationDuration:0.01];
+            
+            material.emission.contents = [UIColor blackColor];
+            
+            [SCNTransaction commit];
+        }];
+        
+        material.emission.contents = [UIColor redColor];
+        
+        [SCNTransaction commit];
+    }
 }
 
 - (BOOL)shouldAutorotate
