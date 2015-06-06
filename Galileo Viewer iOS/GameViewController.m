@@ -25,7 +25,9 @@ float myMaxVal = 0.0;
     int myConceptCount = 0;
     
 //    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/rzFileIOTest/wk1allresponsesROT.crd.txt" ];
-    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk2allresponsesROT.crd.txt" ];
+//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk3allresponsesROT.crd" ];
+    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk9allresponsesROT.crd" ];
+//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk2allresponsesROT.crd.txt" ];
 //    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk1allresponsesROT.crd.txt" ];
     NSError *error;
     
@@ -162,7 +164,8 @@ float myMaxVal = 0.0;
         SCNText *myTitleGeometry = [SCNText textWithString:myTitleString extrusionDepth:1.0];
         SCNNode *myTitleNode = [SCNNode nodeWithGeometry:myTitleGeometry];
         [myTitleNode setScale:SCNVector3Make(2, 2, 2)];
-        [myTitleNode setPosition:SCNVector3Make( -myMaxVal * 2 , 0 , -myMaxVal )];
+        [myTitleGeometry.firstMaterial setTransparency:0.5];
+        [myTitleNode setPosition:SCNVector3Make( -myMaxVal * 4 , myMaxVal * 4 , -myMaxVal * 2 )];
         [scene.rootNode addChildNode:myTitleNode];
         
         
