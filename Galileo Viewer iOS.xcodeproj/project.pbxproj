@@ -16,6 +16,8 @@
 		7C2DF2671B23235000263053 /* Galileo_Viewer_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF2661B23235000263053 /* Galileo_Viewer_iOSTests.m */; };
 		7C2DF2711B23239900263053 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF2701B23239900263053 /* GameViewController.m */; };
 		7C2DF2731B2323A300263053 /* Pattern_Grid_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */; };
+		7C2DF2761B23296D00263053 /* wk1allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2741B23296D00263053 /* wk1allresponsesROT.crd.txt */; };
+		7C2DF2771B23296D00263053 /* wk2allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2751B23296D00263053 /* wk2allresponsesROT.crd.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		7C2DF2661B23235000263053 /* Galileo_Viewer_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Galileo_Viewer_iOSTests.m; sourceTree = "<group>"; };
 		7C2DF2701B23239900263053 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pattern_Grid_16x16.png; sourceTree = "<group>"; };
+		7C2DF2741B23296D00263053 /* wk1allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk1allresponsesROT.crd.txt; sourceTree = "<group>"; };
+		7C2DF2751B23296D00263053 /* wk2allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk2allresponsesROT.crd.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */,
 				7C2DF2491B23235000263053 /* Info.plist */,
 				7C2DF24A1B23235000263053 /* main.m */,
+				7C2DF2741B23296D00263053 /* wk1allresponsesROT.crd.txt */,
+				7C2DF2751B23296D00263053 /* wk2allresponsesROT.crd.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -207,7 +213,9 @@
 			files = (
 				7C2DF25B1B23235000263053 /* LaunchScreen.xib in Resources */,
 				7C2DF2581B23235000263053 /* Images.xcassets in Resources */,
+				7C2DF2761B23296D00263053 /* wk1allresponsesROT.crd.txt in Resources */,
 				7C2DF2501B23235000263053 /* art.scnassets in Resources */,
+				7C2DF2771B23296D00263053 /* wk2allresponsesROT.crd.txt in Resources */,
 				7C2DF2561B23235000263053 /* Main.storyboard in Resources */,
 				7C2DF2731B2323A300263053 /* Pattern_Grid_16x16.png in Resources */,
 			);

@@ -24,8 +24,9 @@ float myMaxVal = 0.0;
     int myDimensions = 0;
     int myConceptCount = 0;
     
-    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/rzFileIOTest/wk1allresponsesROT.crd.txt" ];
-    
+//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/rzFileIOTest/wk1allresponsesROT.crd.txt" ];
+    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk2allresponsesROT.crd.txt" ];
+//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk1allresponsesROT.crd.txt" ];
     NSError *error;
     
     //        NSString *stringFromFile = [NSString stringWithContentsOfFile:@"./test.txt" encoding:NSASCIIStringEncoding error: NULL];
@@ -157,6 +158,16 @@ float myMaxVal = 0.0;
         scnView.autoenablesDefaultLighting = YES;
         
         
+        // rz display the title somewhere
+        SCNText *myTitleGeometry = [SCNText textWithString:myTitleString extrusionDepth:1.0];
+        SCNNode *myTitleNode = [SCNNode nodeWithGeometry:myTitleGeometry];
+        [myTitleNode setScale:SCNVector3Make(2, 2, 2)];
+        [myTitleNode setPosition:SCNVector3Make( -myMaxVal * 2 , 0 , -myMaxVal )];
+        [scene.rootNode addChildNode:myTitleNode];
+        
+        
+        
+        // rz make the spheres and cylinders and text for the concepts
         for (int i = 0; i < myConceptCount; i++) {
             NSLog(@"CRDs for %@ = %ld  %ld   %ld ",myCrdLabels[i] ,myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2]   );
             SCNNode *mySphereNode = [SCNNode node];
