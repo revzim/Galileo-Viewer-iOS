@@ -16,17 +16,17 @@
 		7C2DF2671B23235000263053 /* Galileo_Viewer_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF2661B23235000263053 /* Galileo_Viewer_iOSTests.m */; };
 		7C2DF2711B23239900263053 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2DF2701B23239900263053 /* GameViewController.m */; };
 		7C2DF2731B2323A300263053 /* Pattern_Grid_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */; };
-		7C2DF2761B23296D00263053 /* wk1allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2741B23296D00263053 /* wk1allresponsesROT.crd.txt */; };
-		7C2DF2771B23296D00263053 /* wk2allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C2DF2751B23296D00263053 /* wk2allresponsesROT.crd.txt */; };
 		7C3D68281B2340EC0087EC78 /* 8x8_binary_grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C3D68261B2340EC0087EC78 /* 8x8_binary_grid.png */; };
 		7C3D68291B2340EC0087EC78 /* unnamed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C3D68271B2340EC0087EC78 /* unnamed.png */; };
-		7C6B568C1B2333EA00F9A4BD /* wk3allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B56851B2333EA00F9A4BD /* wk3allresponsesROT.crd.txt */; };
-		7C6B568D1B2333EA00F9A4BD /* wk4allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B56861B2333EA00F9A4BD /* wk4allresponsesROT.crd.txt */; };
-		7C6B568E1B2333EA00F9A4BD /* wk5allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B56871B2333EA00F9A4BD /* wk5allresponsesROT.crd.txt */; };
-		7C6B568F1B2333EA00F9A4BD /* wk6allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B56881B2333EA00F9A4BD /* wk6allresponsesROT.crd.txt */; };
-		7C6B56901B2333EA00F9A4BD /* wk7allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B56891B2333EA00F9A4BD /* wk7allresponsesROT.crd.txt */; };
-		7C6B56911B2333EA00F9A4BD /* wk8allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B568A1B2333EA00F9A4BD /* wk8allresponsesROT.crd.txt */; };
-		7C6B56921B2333EA00F9A4BD /* wk9allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C6B568B1B2333EA00F9A4BD /* wk9allresponsesROT.crd.txt */; };
+		7C786A8D1B27920200136170 /* wk1allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A841B27920200136170 /* wk1allresponsesROT.crd.txt */; };
+		7C786A8E1B27920200136170 /* wk2allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A851B27920200136170 /* wk2allresponsesROT.crd.txt */; };
+		7C786A8F1B27920200136170 /* wk3allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A861B27920200136170 /* wk3allresponsesROT.crd.txt */; };
+		7C786A901B27920200136170 /* wk4allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A871B27920200136170 /* wk4allresponsesROT.crd.txt */; };
+		7C786A911B27920200136170 /* wk5allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A881B27920200136170 /* wk5allresponsesROT.crd.txt */; };
+		7C786A921B27920200136170 /* wk6allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A891B27920200136170 /* wk6allresponsesROT.crd.txt */; };
+		7C786A931B27920200136170 /* wk7allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A8A1B27920200136170 /* wk7allresponsesROT.crd.txt */; };
+		7C786A941B27920200136170 /* wk8allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A8B1B27920200136170 /* wk8allresponsesROT.crd.txt */; };
+		7C786A951B27920200136170 /* wk9allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A8C1B27920200136170 /* wk9allresponsesROT.crd.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,17 +55,17 @@
 		7C2DF2661B23235000263053 /* Galileo_Viewer_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Galileo_Viewer_iOSTests.m; sourceTree = "<group>"; };
 		7C2DF2701B23239900263053 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pattern_Grid_16x16.png; sourceTree = "<group>"; };
-		7C2DF2741B23296D00263053 /* wk1allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk1allresponsesROT.crd.txt; sourceTree = "<group>"; };
-		7C2DF2751B23296D00263053 /* wk2allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk2allresponsesROT.crd.txt; sourceTree = "<group>"; };
 		7C3D68261B2340EC0087EC78 /* 8x8_binary_grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8x8_binary_grid.png; sourceTree = "<group>"; };
 		7C3D68271B2340EC0087EC78 /* unnamed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unnamed.png; sourceTree = "<group>"; };
-		7C6B56851B2333EA00F9A4BD /* wk3allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk3allresponsesROT.crd.txt; sourceTree = "<group>"; };
-		7C6B56861B2333EA00F9A4BD /* wk4allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk4allresponsesROT.crd.txt; sourceTree = "<group>"; };
-		7C6B56871B2333EA00F9A4BD /* wk5allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk5allresponsesROT.crd.txt; sourceTree = "<group>"; };
-		7C6B56881B2333EA00F9A4BD /* wk6allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk6allresponsesROT.crd.txt; sourceTree = "<group>"; };
-		7C6B56891B2333EA00F9A4BD /* wk7allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk7allresponsesROT.crd.txt; sourceTree = "<group>"; };
-		7C6B568A1B2333EA00F9A4BD /* wk8allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk8allresponsesROT.crd.txt; sourceTree = "<group>"; };
-		7C6B568B1B2333EA00F9A4BD /* wk9allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wk9allresponsesROT.crd.txt; sourceTree = "<group>"; };
+		7C786A841B27920200136170 /* wk1allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk1allresponsesROT.crd.txt; path = "Galileo Data/wk1allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C786A851B27920200136170 /* wk2allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk2allresponsesROT.crd.txt; path = "Galileo Data/wk2allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C786A861B27920200136170 /* wk3allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk3allresponsesROT.crd.txt; path = "Galileo Data/wk3allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C786A871B27920200136170 /* wk4allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk4allresponsesROT.crd.txt; path = "Galileo Data/wk4allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C786A881B27920200136170 /* wk5allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk5allresponsesROT.crd.txt; path = "Galileo Data/wk5allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C786A891B27920200136170 /* wk6allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk6allresponsesROT.crd.txt; path = "Galileo Data/wk6allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C786A8A1B27920200136170 /* wk7allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk7allresponsesROT.crd.txt; path = "Galileo Data/wk7allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C786A8B1B27920200136170 /* wk8allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk8allresponsesROT.crd.txt; path = "Galileo Data/wk8allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C786A8C1B27920200136170 /* wk9allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk9allresponsesROT.crd.txt; path = "Galileo Data/wk9allresponsesROT.crd.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,20 +123,20 @@
 		7C2DF2481B23235000263053 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7C786A841B27920200136170 /* wk1allresponsesROT.crd.txt */,
+				7C786A851B27920200136170 /* wk2allresponsesROT.crd.txt */,
+				7C786A861B27920200136170 /* wk3allresponsesROT.crd.txt */,
+				7C786A871B27920200136170 /* wk4allresponsesROT.crd.txt */,
+				7C786A881B27920200136170 /* wk5allresponsesROT.crd.txt */,
+				7C786A891B27920200136170 /* wk6allresponsesROT.crd.txt */,
+				7C786A8A1B27920200136170 /* wk7allresponsesROT.crd.txt */,
+				7C786A8B1B27920200136170 /* wk8allresponsesROT.crd.txt */,
+				7C786A8C1B27920200136170 /* wk9allresponsesROT.crd.txt */,
 				7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */,
 				7C3D68261B2340EC0087EC78 /* 8x8_binary_grid.png */,
 				7C3D68271B2340EC0087EC78 /* unnamed.png */,
 				7C2DF2491B23235000263053 /* Info.plist */,
 				7C2DF24A1B23235000263053 /* main.m */,
-				7C2DF2741B23296D00263053 /* wk1allresponsesROT.crd.txt */,
-				7C2DF2751B23296D00263053 /* wk2allresponsesROT.crd.txt */,
-				7C6B56851B2333EA00F9A4BD /* wk3allresponsesROT.crd.txt */,
-				7C6B56861B2333EA00F9A4BD /* wk4allresponsesROT.crd.txt */,
-				7C6B56871B2333EA00F9A4BD /* wk5allresponsesROT.crd.txt */,
-				7C6B56881B2333EA00F9A4BD /* wk6allresponsesROT.crd.txt */,
-				7C6B56891B2333EA00F9A4BD /* wk7allresponsesROT.crd.txt */,
-				7C6B568A1B2333EA00F9A4BD /* wk8allresponsesROT.crd.txt */,
-				7C6B568B1B2333EA00F9A4BD /* wk9allresponsesROT.crd.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -238,21 +238,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C6B56921B2333EA00F9A4BD /* wk9allresponsesROT.crd.txt in Resources */,
 				7C2DF25B1B23235000263053 /* LaunchScreen.xib in Resources */,
+				7C786A911B27920200136170 /* wk5allresponsesROT.crd.txt in Resources */,
 				7C2DF2581B23235000263053 /* Images.xcassets in Resources */,
-				7C6B568C1B2333EA00F9A4BD /* wk3allresponsesROT.crd.txt in Resources */,
-				7C6B568D1B2333EA00F9A4BD /* wk4allresponsesROT.crd.txt in Resources */,
-				7C2DF2761B23296D00263053 /* wk1allresponsesROT.crd.txt in Resources */,
 				7C3D68291B2340EC0087EC78 /* unnamed.png in Resources */,
+				7C786A8F1B27920200136170 /* wk3allresponsesROT.crd.txt in Resources */,
+				7C786A941B27920200136170 /* wk8allresponsesROT.crd.txt in Resources */,
+				7C786A8E1B27920200136170 /* wk2allresponsesROT.crd.txt in Resources */,
+				7C786A901B27920200136170 /* wk4allresponsesROT.crd.txt in Resources */,
+				7C786A921B27920200136170 /* wk6allresponsesROT.crd.txt in Resources */,
 				7C2DF2501B23235000263053 /* art.scnassets in Resources */,
-				7C6B56901B2333EA00F9A4BD /* wk7allresponsesROT.crd.txt in Resources */,
-				7C6B568F1B2333EA00F9A4BD /* wk6allresponsesROT.crd.txt in Resources */,
+				7C786A8D1B27920200136170 /* wk1allresponsesROT.crd.txt in Resources */,
 				7C3D68281B2340EC0087EC78 /* 8x8_binary_grid.png in Resources */,
-				7C2DF2771B23296D00263053 /* wk2allresponsesROT.crd.txt in Resources */,
-				7C6B56911B2333EA00F9A4BD /* wk8allresponsesROT.crd.txt in Resources */,
 				7C2DF2561B23235000263053 /* Main.storyboard in Resources */,
-				7C6B568E1B2333EA00F9A4BD /* wk5allresponsesROT.crd.txt in Resources */,
+				7C786A951B27920200136170 /* wk9allresponsesROT.crd.txt in Resources */,
+				7C786A931B27920200136170 /* wk7allresponsesROT.crd.txt in Resources */,
 				7C2DF2731B2323A300263053 /* Pattern_Grid_16x16.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

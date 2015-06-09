@@ -14,7 +14,7 @@ float myMaxY = 0.0;
 float myMaxZ = 0.0;
 
 float myMaxVal = 0.0;
-int myDataSet = 1;
+int myDataSet = 6;
 
 @implementation GameViewController
 {
@@ -29,18 +29,56 @@ int myDataSet = 1;
     int myDimensions = 0;
     int myConceptCount = 0;
     
+    
+    // rz get the listing of the dirctory so we can pick the dataset to view
+//    NSString *myFolderPath = [[[NSBundle mainBundle] resourcePath]
+//                                stringByAppendingPathComponent:@"http://robzimmelman.tripod.com/Galileo/"];
+    
+    
+//    NSString *myFolderPath = [[[NSBundle mainBundle] resourcePath]
+//                              stringByAppendingPathComponent:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/"];
+    
+    
+    // rz local Path Test
+    NSError *myError = nil;
+    NSString *myFolderPath = [[[NSBundle mainBundle] resourcePath]
+                              stringByAppendingPathComponent:@""];
+    NSArray  *myFolderContents = [[NSFileManager defaultManager]
+                                    contentsOfDirectoryAtPath:myFolderPath error:&myError];
+    
+//    NSMutableArray *myEditFolder = [NSMutableArray arrayWithArray:myFolderContents];
+    
+    
+    
+    
+    // rz remote URL Test
+//    NSURL *myURL = [NSURL URLWithString:@"http://robzimmelman.tripod.com/Galileo/"];
+//    NSArray *myFolderContents = [NSArray arrayWithContentsOfURL:myURL];
+    
+//    NSArray  *myFolderContents = [[NSFileManager defaultManager]
+//                                  contentsOfDirectoryAtURL:myFolderPath [includingPropertiesForKeys:NSDirectoryEnumerationSkipsHiddenFiles ]:error:nil];
+//    NSLog(@"Folder Path = %@", myFolderPath);
+//    NSLog(@"Folder Contents = %@",myFolderContents);
+
+    for (NSString *myFileName in myFolderContents ) {
+        NSLog(@"Name = %@", myFileName);
+    }
+    
+    
+    
+    
+    
 //    NSString *myPath = @"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk6allresponsesROT.crd";
-    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk%iallresponsesROT.crd.txt", myDataSet];
-    NSURL *url = [NSURL fileURLWithPath:myEditPath];
+    
+//    http://robzimmelman.tripod.com/Galileo/
+    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://robzimmelman.tripod.com/Galileo/wk%iallresponsesROT.crd.txt", myDataSet];
+    
+   
+//    NSURL *url = [NSURL fileURLWithPath:myEditPath];
+    NSURL *url = [NSURL URLWithString:myEditPath];
     
 //    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/rzFileIOTest/wk1allresponsesROT.crd.txt" ];
-//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk3allresponsesROT.crd" ];
-//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk2allresponsesROT.crd.txt" ];
-//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk1allresponsesROT.crd.txt" ];
     NSError *error;
-    
-    //        NSString *stringFromFile = [NSString stringWithContentsOfFile:@"./test.txt" encoding:NSASCIIStringEncoding error: NULL];
-    
     
     NSString *stringFromFile = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:NULL];
     //        NSNumber *myNextNum = 0;
@@ -138,8 +176,28 @@ int myDataSet = 1;
             
             
         }
+        
+        
+        
+// rz stepper to select the dataset number
+//        UIViewController *myVC = [[UIViewController alloc] init];
+//        UIStepper *myStepper = [[UIStepper alloc] init];
+//        [myStepper setMinimumValue:1];
+//        [myStepper setMaximumValue:9];
+//        [myVC.view addSubview:myStepper];
+//        [self.presentedViewController presentViewController:myVC animated:YES completion:nil];
+//        
+        
+        
+        //   rz here is the SceneKit Stuff
+        //
+        //
+        //
+        
         // create a new scene
         SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/ship.dae"];
+        
+        
         
         // rz put some fog just in the middle of the ship so we can see it in real time
         //
@@ -374,4 +432,13 @@ int myDataSet = 1;
     // Release any cached data, images, etc that aren't in use.
 }
 
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    
+}
+
+
+
 @end
+
+
