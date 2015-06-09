@@ -81,7 +81,7 @@ int myDataSet = 1;
         NSLog(@"Cons: %i",myConceptCount);
         NSString *myTitleString = [[myFileLines objectAtIndex:0] substringFromIndex:19];
         NSMutableString *myEditedTitleString = [NSMutableString stringWithString:myTitleString];
-        [myEditedTitleString replaceOccurrencesOfString:@"    " withString:@" " options:NSLiteralSearch range:NSMakeRange(1, myTitleString.length - 1)];
+        [myEditedTitleString replaceOccurrencesOfString:@"    " withString:@"" options:NSLiteralSearch range:NSMakeRange(1, myTitleString.length - 1)];
         
         NSLog(@"Title Is: %@",myEditedTitleString);
         NSLog(@"Line Count= %lu",myWorkLineCount);
