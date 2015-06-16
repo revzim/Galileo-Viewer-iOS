@@ -14,79 +14,76 @@ float myMaxY = 0.0;
 float myMaxZ = 0.0;
 
 float myMaxVal = 0.0;
-int myDataSet = 6;
+int myDataSet = 8;
+
 
 @implementation GameViewController
 {
 }
 
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSString *myDimString = [[NSString alloc] init];
-    NSString *myConString = [[NSString alloc] init];
+    NSString *myDimString = @"";
+    NSString *myConString = @"";
     int myDimensions = 0;
     int myConceptCount = 0;
     
+//    BOOL  myRemoteData = YES;
     
-    // rz get the listing of the dirctory so we can pick the dataset to view
-//    NSString *myFolderPath = [[[NSBundle mainBundle] resourcePath]
-//                                stringByAppendingPathComponent:@"http://robzimmelman.tripod.com/Galileo/"];
+    // ******************************************************************************
+    //
+    //
     
+    //
+    //
+    //
+    // ******************************************************************************
+    // rz local data
+    //
+    //        NSString *myFolderPath = [[[NSBundle mainBundle] resourcePath]
+    //                                  stringByAppendingPathComponent:@""];
+    //        NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"%@/wk%iallresponsesROT.crd.txt",  myFolderPath, myDataSet];
+    //    NSURL *url = [NSURL fileURLWithPath:myEditPath];
     
-//    NSString *myFolderPath = [[[NSBundle mainBundle] resourcePath]
-//                              stringByAppendingPathComponent:@"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/"];
+    //
+    //
+    // rz end local data
+    // ******************************************************************************
+    //
     
-    
-    // rz local Path Test
-    NSError *myError = nil;
-    NSString *myFolderPath = [[[NSBundle mainBundle] resourcePath]
-                              stringByAppendingPathComponent:@""];
-    NSArray  *myFolderContents = [[NSFileManager defaultManager]
-                                    contentsOfDirectoryAtPath:myFolderPath error:&myError];
-    
-//    NSMutableArray *myEditFolder = [NSMutableArray arrayWithArray:myFolderContents];
-    
-    
-    
-    
-    // rz remote URL Test
-//    NSURL *myURL = [NSURL URLWithString:@"http://robzimmelman.tripod.com/Galileo/"];
-//    NSArray *myFolderContents = [NSArray arrayWithContentsOfURL:myURL];
-    
-//    NSArray  *myFolderContents = [[NSFileManager defaultManager]
-//                                  contentsOfDirectoryAtURL:myFolderPath [includingPropertiesForKeys:NSDirectoryEnumerationSkipsHiddenFiles ]:error:nil];
-//    NSLog(@"Folder Path = %@", myFolderPath);
-//    NSLog(@"Folder Contents = %@",myFolderContents);
-
-    for (NSString *myFileName in myFolderContents ) {
-        NSLog(@"Name = %@", myFileName);
-    }
-    
-    
-    
-    
-    
-//    NSString *myPath = @"/Users/robertzimmelman/Documents/XCode/Galileo Viewer iOS/Galileo Viewer iOS/wk6allresponsesROT.crd";
-    
-//    http://robzimmelman.tripod.com/Galileo/
+    // rz remote data
+    //
+    //    http://robzimmelman.tripod.com/Galileo/
+    //
     NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://robzimmelman.tripod.com/Galileo/wk%iallresponsesROT.crd.txt", myDataSet];
+    NSURL *myURL = [NSURL URLWithString:myEditPath];
     
-   
-//    NSURL *url = [NSURL fileURLWithPath:myEditPath];
-    NSURL *url = [NSURL URLWithString:myEditPath];
     
-//    NSURL *url = [NSURL fileURLWithPath:@"/Users/robertzimmelman/Documents/XCode/rzFileIOTest/wk1allresponsesROT.crd.txt" ];
-    NSError *error;
+    NSError *myError;
     
-    NSString *stringFromFile = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:NULL];
+    NSString *stringFromFile = [NSString stringWithContentsOfURL:myURL encoding:NSUTF8StringEncoding error:NULL];
+    
+    //
+    //  rz end remote data
+    // ******************************************************************************
+    //
+    //
+
+    
     //        NSNumber *myNextNum = 0;
+
+    NSLog(@"myEditPath = %@",myEditPath);
+    
     
     if (stringFromFile == nil) {
         // an error occurred
         NSLog(@"Error reading file at %@\n%@",
-              url, [error localizedFailureReason]);
+              myURL, [myError localizedFailureReason]);
     }
     else {
         myDimString = [stringFromFile substringWithRange: NSMakeRange(17, 2)];
@@ -114,7 +111,7 @@ int myDataSet = 6;
         //            for (int i = 0 ; i < myConceptCount; i++) {
         //                NSLog(@"Concept %i = %@", i + 1 , myCrdLabels[i] );
         //            }
-
+        
         NSLog(@"Dims: %i",myDimensions);
         NSLog(@"Cons: %i",myConceptCount);
         NSString *myTitleString = [[myFileLines objectAtIndex:0] substringFromIndex:19];
@@ -146,7 +143,7 @@ int myDataSet = 6;
             
             
             // rz find out largest X, Y and Z values
-
+            
             if (myTempX > myMaxX) {
                 myMaxX = myTempX;
             }
@@ -157,7 +154,7 @@ int myDataSet = 6;
                 myMaxZ = myTempZ;
             }
             
-
+            
             // rz find out maxVal
             
             if (myTempX > myMaxVal) {
@@ -169,7 +166,7 @@ int myDataSet = 6;
             if (myTempX > myMaxVal) {
                 myMaxVal = myTempZ;
             }
-
+            
             
             
             
@@ -179,14 +176,14 @@ int myDataSet = 6;
         
         
         
-// rz stepper to select the dataset number
-//        UIViewController *myVC = [[UIViewController alloc] init];
-//        UIStepper *myStepper = [[UIStepper alloc] init];
-//        [myStepper setMinimumValue:1];
-//        [myStepper setMaximumValue:9];
-//        [myVC.view addSubview:myStepper];
-//        [self.presentedViewController presentViewController:myVC animated:YES completion:nil];
-//        
+        // rz stepper to select the dataset number
+        //        UIViewController *myVC = [[UIViewController alloc] init];
+        //        UIStepper *myStepper = [[UIStepper alloc] init];
+        //        [myStepper setMinimumValue:1];
+        //        [myStepper setMaximumValue:9];
+        //        [myVC.view addSubview:myStepper];
+        //        [self.presentedViewController presentViewController:myVC animated:YES completion:nil];
+        //
         
         
         //   rz here is the SceneKit Stuff
@@ -214,25 +211,28 @@ int myDataSet = 6;
         [scene.rootNode addChildNode:cameraNode];
         
         // place the camera
-        cameraNode.position = SCNVector3Make(0, 50, 100);
+        // rz place the camera at 2 x the maxValue of coordinates
+        //
+        //
+        cameraNode.position = SCNVector3Make(0, myMaxY * 2, myMaxZ * 4);
         cameraNode.camera.yFov = 120.0;
         cameraNode.camera.zFar = 5000.0;
         
         [cameraNode setName:@"camera"];
-
+        
         
         
         // create and add a light above the floor
-
+        
         SCNLight *myTopLight = [SCNLight light];
         [myTopLight setType:SCNLightTypeOmni];
         [myTopLight setColor:[UIColor whiteColor]];
-
+        
         SCNNode *topLightNode = [SCNNode node];
         [topLightNode setPosition: SCNVector3Make(0, 300, 200)];
         [topLightNode setLight:myTopLight];
         [scene.rootNode addChildNode:topLightNode];
-
+        
         
         // create and add a second light above the floor
         SCNNode *topLightNode2 = [SCNNode node];
@@ -246,7 +246,7 @@ int myDataSet = 6;
         SCNNode *bottomLightNode = [SCNNode node];
         bottomLightNode.light = [SCNLight light];
         bottomLightNode.light.type = SCNLightTypeOmni;
-//        bottomLightNode.light.attenuationEndDistance = 1000.0;
+        //        bottomLightNode.light.attenuationEndDistance = 1000.0;
         bottomLightNode.position = SCNVector3Make(0, -200, -100);
         bottomLightNode.light.color = [UIColor lightGrayColor];
         [scene.rootNode addChildNode:bottomLightNode];
@@ -284,7 +284,7 @@ int myDataSet = 6;
         [myTitleGeometry.firstMaterial.specular setContents:[UIColor blueColor]];
         [myTitleGeometry.firstMaterial.ambient setContents:[UIColor blueColor]];
         [myTitleGeometry setSubdivisionLevel:2];
-        [myTitleNode setPosition:SCNVector3Make( -myMaxX * 1.2 , myMaxY * 1.2 , -myMaxZ * 1.2 )];
+        [myTitleNode setPosition:SCNVector3Make( -myMaxX * 2 , myMaxY * 1.2 , -myMaxZ * 1.2 )];
         [scene.rootNode addChildNode:myTitleNode];
         
         
@@ -297,7 +297,7 @@ int myDataSet = 6;
             mySphere.firstMaterial.diffuse.contents = [UIColor redColor];
             mySphere.firstMaterial.specular.contents = [UIColor whiteColor];
             mySphere.firstMaterial.shininess = 1.0;
-//            [mySphereNode setCastsShadow:YES];
+            //            [mySphereNode setCastsShadow:YES];
             [mySphereNode setGeometry:mySphere];
             [mySphereNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2])];
             [scene.rootNode addChildNode:mySphereNode];
@@ -308,9 +308,9 @@ int myDataSet = 6;
             myText.firstMaterial.shininess = 0.75;
             [myText setChamferRadius:0.25];
             [myText setSubdivisionLevel:1];
-//            SCNLookAtConstraint *myConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:cameraNode];
-//            NSArray *myConstraintArray = [NSArray arrayWithObjects:myConstraint, nil];
-//            myTextNode.constraints = myConstraintArray;
+            //            SCNLookAtConstraint *myConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:cameraNode];
+            //            NSArray *myConstraintArray = [NSArray arrayWithObjects:myConstraint, nil];
+            //            myTextNode.constraints = myConstraintArray;
             NSLog(@"MyText = %@",myText);
             [myTextNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2])];
             [myTextNode setGeometry:myText];
@@ -325,7 +325,7 @@ int myDataSet = 6;
             myCylinder.firstMaterial.ambient.contents = [UIColor darkGrayColor];
             [myCylinderNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1]/2, myCrdsArray[i][2])];
             [scene.rootNode addChildNode:myCylinderNode];
-
+            
             
             
             
@@ -337,15 +337,18 @@ int myDataSet = 6;
         myFloor.reflectionFalloffEnd = 5.0;
         myFloor.reflectionFalloffStart = 1.0;
         myFloor.reflectivity = 0.5;
-//        myFloor.firstMaterial.diffuse.contents = [UIColor darkGrayColor];
-//        myFloor.firstMaterial.ambient.contents = [UIColor darkGrayColor];
+        //        myFloor.firstMaterial.diffuse.contents = [UIColor darkGrayColor];
+        //        myFloor.firstMaterial.ambient.contents = [UIColor darkGrayColor];
         myFloor.firstMaterial.doubleSided = YES;
         myFloor.firstMaterial.transparency = 0.35;
         scene.rootNode.geometry = myFloor;
-//        myFloor.firstMaterial.diffuse.contents = @"Pattern_Grid_16x16.png";
-                myFloor.firstMaterial.diffuse.contents = @"unnamed.png";
-//        myFloor.firstMaterial.diffuse.contents = @"8x8_binary_grid.png";
+        //        myFloor.firstMaterial.diffuse.contents = @"Pattern_Grid_16x16.png";
+        myFloor.firstMaterial.diffuse.contents = @"unnamed.png";
+        //        myFloor.firstMaterial.diffuse.contents = @"8x8_binary_grid.png";
         myFloor.firstMaterial.locksAmbientWithDiffuse = YES;
+        
+        
+        
         
         
         // add a tap gesture recognizer
@@ -417,7 +420,7 @@ int myDataSet = 6;
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
@@ -440,5 +443,6 @@ int myDataSet = 6;
 
 
 @end
+
 
 
