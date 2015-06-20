@@ -14,7 +14,7 @@ float myMaxY = 0.0;
 float myMaxZ = 0.0;
 
 float myMaxVal = 0.0;
-int myDataSet = 8;
+int myDataSet = 6;
 
 
 @implementation GameViewController
@@ -192,11 +192,11 @@ int myDataSet = 8;
         //
         
         // create a new scene
-        SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/ship.dae"];
+        SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/GalileoScene.dae"];
         
         
         
-        // rz put some fog just in the middle of the ship so we can see it in real time
+        // rz put some fog just in the middle of the scene so we can see it in real time
         //
         scene.fogColor = [UIColor whiteColor];
         scene.fogStartDistance = 50.0;
