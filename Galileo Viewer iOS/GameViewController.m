@@ -75,12 +75,12 @@ int myGalileoDataHeaderLength = 19;
     //     http://www.acsu.buffalo.edu/~woelfel/DATA/data.crd.txt
     
     
-    //            NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://robzimmelman.tripod.com/Galileo/barnett.crd.txt"];
+                NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://robzimmelman.tripod.com/Galileo/barnett.crd.txt"];
     
     
     
     //        NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://robzimmelman.tripod.com/Galileo/wk%iallresponsesROT.crd.txt", myDataSet];
-    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://www.acsu.buffalo.edu/~woelfel/DATA/data.crd.txt"];
+//    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://www.acsu.buffalo.edu/~woelfel/DATA/data.crd.txt"];
     NSURL *myURL = [NSURL URLWithString:myEditPath];
     
     
@@ -394,6 +394,11 @@ int myGalileoDataHeaderLength = 19;
             NSLog(@"CRDs for %@ = %f  %f   %f ",myCrdLabels[i] ,myNormalizedCrdsArray[i][0], myNormalizedCrdsArray[i][1], myNormalizedCrdsArray[i][2]   );
             SCNNode *mySphereNode = [SCNNode node];
             SCNSphere *mySphere = [SCNSphere sphereWithRadius:mySphereRadius];
+            if (myConceptCount > 50) {
+                [mySphereNode setScale:SCNVector3Make(.5, .5, .5)];
+            }
+            
+            
             mySphere.firstMaterial.diffuse.contents = [UIColor redColor];
             mySphere.firstMaterial.specular.contents = [UIColor whiteColor];
             mySphere.firstMaterial.shininess = 1.0;
@@ -414,12 +419,29 @@ int myGalileoDataHeaderLength = 19;
             //NSLog(@"MyText = %@",myText);
             [myTextNode setPosition:SCNVector3Make(myNormalizedCrdsArray[i][0], myNormalizedCrdsArray[i][1], myNormalizedCrdsArray[i][2])];
             [myTextNode setGeometry:myText];
-            [myTextNode setScale:SCNVector3Make(0.5, 0.5, 0.5)];
+            
+            //
+            //
+            //  if there are a lot of concepts, make the text smaller
+            //
+            if (myConceptCount > 50) {
+                [myTextNode setScale:SCNVector3Make(0.15, 0.15, 0.15)];
+            }
+            else {
+                [myTextNode setScale:SCNVector3Make(0.5, 0.5, 0.5)];
+            }
             [scene.rootNode addChildNode:myTextNode];
             
             
             SCNNode *myCylinderNode = [SCNNode node];
             SCNCylinder *myCylinder = [SCNCylinder cylinderWithRadius:0.25 height:  fabs(myNormalizedCrdsArray[i][1]) ];
+            
+//            if (myConceptCount > 50) {
+//                [myCylinderNode setScale:SCNVector3Make(0.05, 0.05, 0.05)];
+//            }
+//            else{
+//                [myCylinderNode setScale:SCNVector3Make(0.25, 0.25, 0.25)];
+//            }
             [myCylinderNode setGeometry:myCylinder];
             myCylinder.firstMaterial.specular.contents = [UIColor darkGrayColor];
             myCylinder.firstMaterial.ambient.contents = [UIColor darkGrayColor];
