@@ -27,6 +27,7 @@
 		7C786A931B27920200136170 /* wk7allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A8A1B27920200136170 /* wk7allresponsesROT.crd.txt */; };
 		7C786A941B27920200136170 /* wk8allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A8B1B27920200136170 /* wk8allresponsesROT.crd.txt */; };
 		7C786A951B27920200136170 /* wk9allresponsesROT.crd.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7C786A8C1B27920200136170 /* wk9allresponsesROT.crd.txt */; };
+		7C83F94D1B359E3C00BB0E8F /* 8x8_binary_grid_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C83F94C1B359E3C00BB0E8F /* 8x8_binary_grid_small.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		7C786A8A1B27920200136170 /* wk7allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk7allresponsesROT.crd.txt; path = "Galileo Data/wk7allresponsesROT.crd.txt"; sourceTree = "<group>"; };
 		7C786A8B1B27920200136170 /* wk8allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk8allresponsesROT.crd.txt; path = "Galileo Data/wk8allresponsesROT.crd.txt"; sourceTree = "<group>"; };
 		7C786A8C1B27920200136170 /* wk9allresponsesROT.crd.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = wk9allresponsesROT.crd.txt; path = "Galileo Data/wk9allresponsesROT.crd.txt"; sourceTree = "<group>"; };
+		7C83F94C1B359E3C00BB0E8F /* 8x8_binary_grid_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8x8_binary_grid_small.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				7C786A8B1B27920200136170 /* wk8allresponsesROT.crd.txt */,
 				7C786A8C1B27920200136170 /* wk9allresponsesROT.crd.txt */,
 				7C2DF2721B2323A300263053 /* Pattern_Grid_16x16.png */,
+				7C83F94C1B359E3C00BB0E8F /* 8x8_binary_grid_small.png */,
 				7C3D68261B2340EC0087EC78 /* 8x8_binary_grid.png */,
 				7C3D68271B2340EC0087EC78 /* unnamed.png */,
 				7C2DF2491B23235000263053 /* Info.plist */,
@@ -253,6 +256,7 @@
 				7C2DF2561B23235000263053 /* Main.storyboard in Resources */,
 				7C786A951B27920200136170 /* wk9allresponsesROT.crd.txt in Resources */,
 				7C786A931B27920200136170 /* wk7allresponsesROT.crd.txt in Resources */,
+				7C83F94D1B359E3C00BB0E8F /* 8x8_binary_grid_small.png in Resources */,
 				7C2DF2731B2323A300263053 /* Pattern_Grid_16x16.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

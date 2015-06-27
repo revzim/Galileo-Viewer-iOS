@@ -16,6 +16,14 @@ float myMaxZ = 0.0;
 float myMaxVal = 0.0;
 int myDataSet = 6;
 
+int myLineSkip =  0;
+
+int myCrdLineCount = 0;
+
+// DATA HEADER LENGTH IS 19 CHARACTERS, SEE BELOW
+//(8F10.4)   15 10 17
+int myGalileoDataHeaderLength = 19;
+
 
 @implementation GameViewController
 {
@@ -27,13 +35,16 @@ int myDataSet = 6;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    NSString *myFormatString = @"(8F10.4)";
     NSString *myDimString = @"";
     NSString *myConString = @"";
     int myDimensions = 0;
     int myConceptCount = 0;
+    int myCrdsPerLine = 8; // see assignment of myFormatString above (fortran format)
+    int myCrdsLength = 10; //see assignment of myFormatString above (fortran format)
+    int myCrdsDecimalPlaces = 4; // see assignment of myFormatString above (fortran format)
     
-//    BOOL  myRemoteData = YES;
+    //    BOOL  myRemoteData = YES;
     
     // ******************************************************************************
     //
@@ -60,7 +71,16 @@ int myDataSet = 6;
     //
     //    http://robzimmelman.tripod.com/Galileo/
     //
-    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://robzimmelman.tripod.com/Galileo/wk%iallresponsesROT.crd.txt", myDataSet];
+    
+    //     http://www.acsu.buffalo.edu/~woelfel/DATA/data.crd.txt
+    
+    
+    //            NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://robzimmelman.tripod.com/Galileo/barnett.crd.txt"];
+    
+    
+    
+    //        NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://robzimmelman.tripod.com/Galileo/wk%iallresponsesROT.crd.txt", myDataSet];
+    NSMutableString *myEditPath = [NSMutableString stringWithFormat:@"http://www.acsu.buffalo.edu/~woelfel/DATA/data.crd.txt"];
     NSURL *myURL = [NSURL URLWithString:myEditPath];
     
     
@@ -73,10 +93,10 @@ int myDataSet = 6;
     // ******************************************************************************
     //
     //
-
+    
     
     //        NSNumber *myNextNum = 0;
-
+    
     NSLog(@"myEditPath = %@",myEditPath);
     
     
@@ -86,11 +106,33 @@ int myDataSet = 6;
               myURL, [myError localizedFailureReason]);
     }
     else {
-        myDimString = [stringFromFile substringWithRange: NSMakeRange(17, 2)];
-        myConString = [stringFromFile substringWithRange: NSMakeRange(11, 2)];
+        myFormatString = [stringFromFile substringWithRange: NSMakeRange(0, 8)];
+        myCrdsPerLine =  [myFormatString substringWithRange:NSMakeRange(1, 1)].intValue;
+        myCrdsLength = [myFormatString substringWithRange:NSMakeRange(3,2 )].intValue;
+        myCrdsDecimalPlaces = [myFormatString substringWithRange:NSMakeRange(6, 1)].intValue;
+        
+        NSLog(@"MyCrds Length = %d, MyCrdsPerLine = %d, myCrdsDecimalPlaces = %d", myCrdsLength,myCrdsPerLine, myCrdsDecimalPlaces);
+        
+        // DATA HEADER LENGTH IS 19 CHARACTERS, SEE BELOW
+        //(8F10.4)   15 10 17
+        
+        
+        //(8F10.4) 105 76125
+        //(8F10.4)   15 10 17
+        //(6F12.4) 105 64105
+        // rz new galileo format?
+        // needed for the larger datasets.
+        myDimString = [stringFromFile substringWithRange: NSMakeRange(17, 3)];
+        myConString = [stringFromFile substringWithRange: NSMakeRange(11, 3)];
+        //
+        // rz works for first datasets supplied and the dataset from Carolyn
+        //        myDimString = [stringFromFile substringWithRange: NSMakeRange(17, 2)];
+        //        myConString = [stringFromFile substringWithRange: NSMakeRange(11, 2)];
         myDimensions = [myDimString intValue];
         myConceptCount = [myConString intValue];
         NSArray *myFileLines = [stringFromFile componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        //        NSLog(@"myFileLines = %@",myFileLines);
+        //
         NSMutableArray *myWorkLines = [NSMutableArray arrayWithArray:myFileLines];
         NSInteger myLineCount = [myFileLines count];
         
@@ -100,6 +142,7 @@ int myDataSet = 6;
             }
         }
         NSUInteger myWorkLineCount = [myWorkLines count] ;
+        NSLog(@"myWorkLineCount = %lu",(unsigned long)myWorkLineCount);
         
         //            for (int i = 0 ; i < myWorkLineCount; i++) {
         //                NSLog(@"Line %i: %@", i , myWorkLines[i]);
@@ -114,36 +157,71 @@ int myDataSet = 6;
         
         NSLog(@"Dims: %i",myDimensions);
         NSLog(@"Cons: %i",myConceptCount);
-        NSString *myTitleString = [[myFileLines objectAtIndex:0] substringFromIndex:19];
-        NSMutableString *myEditedTitleString = [NSMutableString stringWithString:myTitleString];
-        [myEditedTitleString replaceOccurrencesOfString:@"    " withString:@"" options:NSLiteralSearch range:NSMakeRange(1, myTitleString.length - 1)];
+        long myTitleLength = 0;
+        myTitleLength = [[myFileLines objectAtIndex:0] length ] - myGalileoDataHeaderLength;
+        NSLog(@"Title length = %ld",myTitleLength);
+        NSMutableString *myEditedTitleString = [NSMutableString stringWithString:@""];
         
-        NSLog(@"Title Is: %@",myEditedTitleString);
-        NSLog(@"Line Count= %lu",myWorkLineCount);
+        
+        if (myTitleLength > 0) {
+            NSString *myTitleString = [[myFileLines objectAtIndex:0] substringFromIndex:myGalileoDataHeaderLength];
+            myEditedTitleString = [NSMutableString stringWithString:myTitleString];
+            NSLog(@"BEFORE REPLACE, Title Is: %@",myEditedTitleString);
+            [myEditedTitleString replaceOccurrencesOfString:@"    " withString:@"" options:NSLiteralSearch range:NSMakeRange(1, myTitleString.length - 1)];
+        }
+        else{
+            myEditedTitleString = [NSMutableString stringWithString:@""];
+        }
+        NSLog(@"NOW AFTER REPLACE, Title Is: %@",myEditedTitleString);
+        
+        NSLog(@"myWorkLineLine Count= %lu",(unsigned long)myWorkLineCount);
         
         NSArray *myCrdLines = [ myWorkLines objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange( 1, myWorkLineCount  - myConceptCount - 1)]   ];
-        long myTempX = 0;
-        long myTempY = 0;
-        long myTempZ = 0;
+        double myTempX = 0;
+        double myTempY = 0;
+        double myTempZ = 0;
         int j = 0;
-        long myCrdsArray[20][3];
+        double myCrdsArray[200][3];
+        double myNormalizedCrdsArray[200][3];
+        
+        // rz we have to skip past the dimensions we're not interested in
+        //
+        double myTempLineSkip = (double)  myDimensions /  (double) myCrdsPerLine;
+        myLineSkip =  ceil(myTempLineSkip);
+        NSLog(@"myTempLineSkip = %f",myTempLineSkip);
+        
+        NSLog(@"myLineSkip = %d",myLineSkip);
+        
+        myCrdLineCount = myConceptCount * myLineSkip;
+        NSLog(@"myCrdLineCount = %d",myCrdLineCount);
+        
         for (int i = 0; i < myConceptCount; i++) {
-            j = i * 3;
-            //                NSLog(@"myCrdLines[j]= %@", myCrdLines[j] );
+            NSLog(@"In Loop.  i = %d",i);
+            j = i * myLineSkip;
+            NSLog(@"myCrdLines[j]= %@", myCrdLines[j] );
             NSArray *myTempArray = [NSArray arrayWithObjects:myCrdLines[j], nil];
             NSString *myTempString = [[ myTempArray valueForKey:@"description"] componentsJoinedByString:@""];
-            //                NSLog(@"TempString= %@",myTempString);
-            myTempX = [[myTempString substringWithRange:NSMakeRange(0, 10)] doubleValue] ;
-            myTempY = [[myTempString substringWithRange:NSMakeRange(11, 10)] doubleValue] ;
-            myTempZ = [[myTempString substringWithRange:NSMakeRange(21, 10)] doubleValue] ;
-            //                NSLog(@"X= %ld, Y= %ld, Z= %ld" , myTempX , myTempY , myTempZ);
+            myTempX = [[myTempString substringWithRange:NSMakeRange(0, myCrdsLength)] floatValue] ;
+            myTempY = [[myTempString substringWithRange:NSMakeRange(myCrdsLength + 1, myCrdsLength)] floatValue] ;
+            myTempZ = [[myTempString substringWithRange:NSMakeRange((myCrdsLength * 2 ) + 1, myCrdsLength)] floatValue] ;
+            
+            
+            
+            
+            
+            NSLog(@"X= %f, Y= %f, Z= %f" , myTempX , myTempY , myTempZ);
             myCrdsArray[i][0] =  myTempX;
             myCrdsArray[i][1] =  myTempY;
             myCrdsArray[i][2] =  myTempZ;
             
+            //
+            // rz for very dense datset with all values between 0 and 2
+            //
+            //            myCrdsArray[i][0] =  myTempX * 25 ;
+            //            myCrdsArray[i][1] =  myTempY * 25 ;
+            //            myCrdsArray[i][2] =  myTempZ * 25 ;
             
             // rz find out largest X, Y and Z values
-            
             if (myTempX > myMaxX) {
                 myMaxX = myTempX;
             }
@@ -153,8 +231,6 @@ int myDataSet = 6;
             if (myTempZ > myMaxZ) {
                 myMaxZ = myTempZ;
             }
-            
-            
             // rz find out maxVal
             
             if (myTempX > myMaxVal) {
@@ -167,34 +243,30 @@ int myDataSet = 6;
                 myMaxVal = myTempZ;
             }
             
-            
-            
-            
-            
-            
         }
         
         
-        
-        // rz stepper to select the dataset number
-        //        UIViewController *myVC = [[UIViewController alloc] init];
-        //        UIStepper *myStepper = [[UIStepper alloc] init];
-        //        [myStepper setMinimumValue:1];
-        //        [myStepper setMaximumValue:9];
-        //        [myVC.view addSubview:myStepper];
-        //        [self.presentedViewController presentViewController:myVC animated:YES completion:nil];
+        // rz now normalize the values to a max of 100
+        //
         //
         
+        double myNormalizeMult = 100 / myMaxVal;
+        
+        for (int i = 0; i < myConceptCount; i++) {
+            myNormalizedCrdsArray[i][0] = myCrdsArray[i][0] * myNormalizeMult;
+            myNormalizedCrdsArray[i][1] = myCrdsArray[i][1] * myNormalizeMult;
+            myNormalizedCrdsArray[i][2] = myCrdsArray[i][2] * myNormalizeMult;
+        }
         
         //   rz here is the SceneKit Stuff
         //
         //
         //
         
+        NSLog(@"About to Create Scene");
+        
         // create a new scene
         SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/GalileoScene.dae"];
-        
-        
         
         // rz put some fog just in the middle of the scene so we can see it in real time
         //
@@ -211,10 +283,25 @@ int myDataSet = 6;
         [scene.rootNode addChildNode:cameraNode];
         
         // place the camera
-        // rz place the camera at 2 x the maxValue of coordinates
+        // rz place the camera at a position to reflect the max as 100
         //
         //
-        cameraNode.position = SCNVector3Make(0, myMaxY * 2, myMaxZ * 4);
+        //
+        cameraNode.position = SCNVector3Make(0, 75, 125);
+        //
+        //
+        // rz here is where the camera should be
+        //
+        //        cameraNode.position = SCNVector3Make(0, myMaxY * 2, myMaxZ * 4);
+        // here is where the camera is for the demo set
+        //        cameraNode.position = SCNVector3Make(0, myMaxY /4  , myMaxZ);
+        //
+        //
+        //
+        //
+        // rz put camera here for very dense scene
+        //
+        //        cameraNode.position = SCNVector3Make(0, myMaxY * 20 , myMaxZ * 30);
         cameraNode.camera.yFov = 120.0;
         cameraNode.camera.zFar = 5000.0;
         
@@ -251,8 +338,14 @@ int myDataSet = 6;
         bottomLightNode.light.color = [UIColor lightGrayColor];
         [scene.rootNode addChildNode:bottomLightNode];
         
+        //        NSLog(@"myWorkLines = %@",myWorkLines);
         
-        NSArray *myCrdLabels = [ myWorkLines objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange( myWorkLineCount - myConceptCount , myConceptCount)] ];
+        
+        //        NSArray *myCrdLabels = [ myWorkLines objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange( myWorkLineCount - myConceptCount , myConceptCount)] ];
+        NSArray *myCrdLabels = [ myWorkLines objectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange( myCrdLineCount + 1, myConceptCount)] ];
+        
+        NSLog(@"myCrdLabels = %@",myCrdLabels);
+        
         
         
         SCNView *scnView = (SCNView *)self.view;
@@ -271,27 +364,34 @@ int myDataSet = 6;
         
         // rz default lighting
         scnView.autoenablesDefaultLighting = YES;
-        
-        
-        // rz display the title somewhere
-        SCNText *myTitleGeometry = [SCNText textWithString:myEditedTitleString extrusionDepth:1.0];
-        SCNNode *myTitleNode = [SCNNode nodeWithGeometry:myTitleGeometry];
-        [myTitleNode setScale:SCNVector3Make(2, 2, 2)];
-        [myTitleGeometry.firstMaterial setTransparency:0.5];
-        
-        [myTitleGeometry.firstMaterial setShininess:1.0];
-        
-        [myTitleGeometry.firstMaterial.specular setContents:[UIColor blueColor]];
-        [myTitleGeometry.firstMaterial.ambient setContents:[UIColor blueColor]];
-        [myTitleGeometry setSubdivisionLevel:2];
-        [myTitleNode setPosition:SCNVector3Make( -myMaxX * 2 , myMaxY * 1.2 , -myMaxZ * 1.2 )];
-        [scene.rootNode addChildNode:myTitleNode];
-        
+        NSLog(@"MyTitleLength = %ld",myTitleLength);
+        if (myTitleLength > 0) {
+            
+            // rz display the title somewhere
+            SCNText *myTitleGeometry = [SCNText textWithString:myEditedTitleString extrusionDepth:1.0];
+            SCNNode *myTitleNode = [SCNNode nodeWithGeometry:myTitleGeometry];
+            [myTitleNode setScale:SCNVector3Make(2, 2, 2)];
+            [myTitleGeometry.firstMaterial setTransparency:0.5];
+            
+            [myTitleGeometry.firstMaterial setShininess:1.0];
+            
+            [myTitleGeometry.firstMaterial.specular setContents:[UIColor blueColor]];
+            [myTitleGeometry.firstMaterial.ambient setContents:[UIColor blueColor]];
+            [myTitleGeometry setSubdivisionLevel:2];
+            //
+            //
+            //  rz place title according to normalized maxval of 100
+            //
+            [myTitleNode setPosition:SCNVector3Make(  100 * -2.0 , 100 * 1.2 , 100 * -1.2 )];
+            //            [myTitleNode setPosition:SCNVector3Make(  myMaxX * -2.0 , myMaxY * 1.2 , myMaxZ * -1.2 )];
+            [scene.rootNode addChildNode:myTitleNode];
+            
+        }
         
         
         // rz make the spheres and cylinders and text for the concepts
         for (int i = 0; i < myConceptCount; i++) {
-            NSLog(@"CRDs for %@ = %ld  %ld   %ld ",myCrdLabels[i] ,myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2]   );
+            NSLog(@"CRDs for %@ = %f  %f   %f ",myCrdLabels[i] ,myNormalizedCrdsArray[i][0], myNormalizedCrdsArray[i][1], myNormalizedCrdsArray[i][2]   );
             SCNNode *mySphereNode = [SCNNode node];
             SCNSphere *mySphere = [SCNSphere sphereWithRadius:mySphereRadius];
             mySphere.firstMaterial.diffuse.contents = [UIColor redColor];
@@ -299,7 +399,7 @@ int myDataSet = 6;
             mySphere.firstMaterial.shininess = 1.0;
             //            [mySphereNode setCastsShadow:YES];
             [mySphereNode setGeometry:mySphere];
-            [mySphereNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2])];
+            [mySphereNode setPosition:SCNVector3Make(myNormalizedCrdsArray[i][0], myNormalizedCrdsArray[i][1], myNormalizedCrdsArray[i][2])];
             [scene.rootNode addChildNode:mySphereNode];
             
             
@@ -311,19 +411,19 @@ int myDataSet = 6;
             //            SCNLookAtConstraint *myConstraint = [SCNLookAtConstraint lookAtConstraintWithTarget:cameraNode];
             //            NSArray *myConstraintArray = [NSArray arrayWithObjects:myConstraint, nil];
             //            myTextNode.constraints = myConstraintArray;
-            NSLog(@"MyText = %@",myText);
-            [myTextNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1], myCrdsArray[i][2])];
+            //NSLog(@"MyText = %@",myText);
+            [myTextNode setPosition:SCNVector3Make(myNormalizedCrdsArray[i][0], myNormalizedCrdsArray[i][1], myNormalizedCrdsArray[i][2])];
             [myTextNode setGeometry:myText];
             [myTextNode setScale:SCNVector3Make(0.5, 0.5, 0.5)];
             [scene.rootNode addChildNode:myTextNode];
             
             
             SCNNode *myCylinderNode = [SCNNode node];
-            SCNCylinder *myCylinder = [SCNCylinder cylinderWithRadius:0.25 height:  labs(myCrdsArray[i][1]) ];
+            SCNCylinder *myCylinder = [SCNCylinder cylinderWithRadius:0.25 height:  fabs(myNormalizedCrdsArray[i][1]) ];
             [myCylinderNode setGeometry:myCylinder];
             myCylinder.firstMaterial.specular.contents = [UIColor darkGrayColor];
             myCylinder.firstMaterial.ambient.contents = [UIColor darkGrayColor];
-            [myCylinderNode setPosition:SCNVector3Make(myCrdsArray[i][0], myCrdsArray[i][1]/2, myCrdsArray[i][2])];
+            [myCylinderNode setPosition:SCNVector3Make(myNormalizedCrdsArray[i][0], myNormalizedCrdsArray[i][1]/2, myNormalizedCrdsArray[i][2])];
             [scene.rootNode addChildNode:myCylinderNode];
             
             
@@ -344,7 +444,8 @@ int myDataSet = 6;
         scene.rootNode.geometry = myFloor;
         //        myFloor.firstMaterial.diffuse.contents = @"Pattern_Grid_16x16.png";
         myFloor.firstMaterial.diffuse.contents = @"unnamed.png";
-        //        myFloor.firstMaterial.diffuse.contents = @"8x8_binary_grid.png";
+        //        myFloor.firstMaterial.diffuse.contents = @"8x8_binary_grid_small.png";
+        
         myFloor.firstMaterial.locksAmbientWithDiffuse = YES;
         
         
